@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  # MongoDB
+  mongo_db:
+    image: mongo:latest
+    container_name: db_container
+    restart: always
+    ports:
+      - 2717:27017
+    volumes:
+      - mongo_db:/data/db
+
+  #NODEJS API Service
+  api:
+    build: .
+    ports:
+      - 4000:3000
+    volumes:
+      - .:/usr/src/app
+    environment:
+      PORT: 3000
+      MONGODB_URL: mongodb://mongo_db:27017
+      DB_NAME: iban_db
+      NAME: IBAN
+    depends_on:
+      - mongo_db
+
+volumes:
+  mongo_db:
