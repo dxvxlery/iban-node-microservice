@@ -5,7 +5,7 @@ const HEADERS = {
 const getBankData = async (iban) => {
   try {
     const API_KEY = process.env.API_KEY;
-    const DOMAIN = process.env.DOMAIN;
+    const DOMAIN = process.env.IBAN_DOMAIN;
     const url = `${DOMAIN}/validate/${iban}?api_key=${API_KEY}`;
 
     const data = await fetch(url, {
